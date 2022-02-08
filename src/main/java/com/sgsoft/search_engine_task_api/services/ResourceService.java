@@ -18,7 +18,7 @@ public class ResourceService {
      * Save resource service
      * @param resource The resource to be saved
      */
-    public void saveRescource(Resource resource){
+    public void saveResource(Resource resource){
         if(resource == null){
             throw new IllegalArgumentException("Invalid Resource details passed.");
         }

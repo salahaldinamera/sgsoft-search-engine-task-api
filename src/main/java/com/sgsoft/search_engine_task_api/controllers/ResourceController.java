@@ -9,7 +9,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Resource Controller
@@ -30,7 +29,7 @@ public class ResourceController {
      */
     @PostMapping("/create")
     public ResponseEntity<Resource> createResource(@Validated @RequestBody Resource resource){
-        resourceService.saveRescource(resource);
+        resourceService.saveResource(resource);
         return new ResponseEntity(resource, HttpStatus.OK);
     }
 

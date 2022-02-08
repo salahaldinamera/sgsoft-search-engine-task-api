@@ -19,7 +19,7 @@ public class TagService {
      * Save tag service
      * @param tag The tag to be saved
      */
-    public void saveRescource(Tag tag){
+    public void saveResource(Tag tag){
         if(tag == null){
             throw new IllegalArgumentException("Invalid Tag details passed.");
         }

@@ -9,7 +9,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Tag Controller
@@ -30,7 +29,7 @@ public class TagController {
      */
     @PostMapping("/create")
     public ResponseEntity<Tag> createTag(@Validated @RequestBody Tag tag){
-        tagService.saveRescource(tag);
+        tagService.saveResource(tag);
         return new ResponseEntity(tag, HttpStatus.OK);
     }
 
