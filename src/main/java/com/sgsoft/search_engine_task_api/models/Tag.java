@@ -40,4 +40,24 @@ public class Tag {
     public void setResources(List<Resource> resources) {
         this.resources = resources;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Tag tag = (Tag) o;
+
+        if (id != tag.id) return false;
+        if (keyword != null ? !keyword.equals(tag.keyword) : tag.keyword != null) return false;
+        return resources != null ? resources.equals(tag.resources) : tag.resources == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (keyword != null ? keyword.hashCode() : 0);
+        result = 31 * result + (resources != null ? resources.hashCode() : 0);
+        return result;
+    }
 }

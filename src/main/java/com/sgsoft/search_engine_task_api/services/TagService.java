@@ -19,11 +19,11 @@ public class TagService {
      * Save tag service
      * @param tag The tag to be saved
      */
-    public void saveResource(Tag tag){
+    public Tag saveTag(Tag tag){
         if(tag == null){
             throw new IllegalArgumentException("Invalid Tag details passed.");
         }
-        tagRepository.save(tag);
+        return tagRepository.save(tag);
     }
 
     /**
@@ -61,8 +61,9 @@ public class TagService {
      * Delete tag by id service
      * @param id The tag id to be deleted
      */
-    public void deleteTag(Integer id){
+    public boolean deleteTag(Integer id){
         tagRepository.deleteById(id);
+        return true;
     }
 
 }

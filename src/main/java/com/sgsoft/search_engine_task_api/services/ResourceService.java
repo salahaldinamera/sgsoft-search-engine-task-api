@@ -18,11 +18,11 @@ public class ResourceService {
      * Save resource service
      * @param resource The resource to be saved
      */
-    public void saveResource(Resource resource){
+    public Resource saveResource(Resource resource){
         if(resource == null){
             throw new IllegalArgumentException("Invalid Resource details passed.");
         }
-        resourceRepository.save(resource);
+        return resourceRepository.save(resource);
     }
 
     /**
@@ -62,7 +62,8 @@ public class ResourceService {
      * Delete resource by id service
      * @param id The resource id to be deleted
      */
-    public void deleteResource(Integer id){
+    public boolean deleteResource(Integer id){
         resourceRepository.deleteById(id);
+        return true;
     }
 }
