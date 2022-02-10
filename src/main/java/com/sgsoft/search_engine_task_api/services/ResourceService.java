@@ -21,9 +21,24 @@ public class ResourceService {
      */
     public Resource saveResource(Resource resource){
         if(resource == null){
-            throw new IllegalArgumentException("Invalid Resource details passed.");
+            throw new IllegalArgumentException("Invalid resource details passed.");
         }
         return resourceRepository.save(resource);
+    }
+
+    /**
+     * Save resources service
+     * @param resources The resources to be saved
+     * @return
+     */
+    public List<Resource> saveResources(List<Resource> resources){
+        if (resources == null) throw new IllegalArgumentException("Invalid resources entered.");
+        for (int i = 0;i<resources.size();i++){
+            if(resources.get(i) ==  null)  throw new IllegalArgumentException("One of the resources is invalid.");
+            Resource resource = resourceRepository.save(resources.get(i));
+            resources.set(i,resource);
+        }
+        return resources;
     }
 
     /**

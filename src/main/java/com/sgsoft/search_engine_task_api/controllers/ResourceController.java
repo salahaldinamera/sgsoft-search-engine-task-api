@@ -29,8 +29,19 @@ public class ResourceController {
      */
     @PostMapping("/create")
     public ResponseEntity<Resource> createResource(@Validated @RequestBody Resource resource){
-        resourceService.saveResource(resource);
+        resource = resourceService.saveResource(resource);
         return new ResponseEntity(resource, HttpStatus.OK);
+    }
+
+    /**
+     * Create resources operation API endpoint
+     * @param resources List of resources to be added
+     * @return Resources ResponceEntity with HttpStatus code (HttpStatus.OK)
+     */
+    @PostMapping("/create/multi")
+    public ResponseEntity<Resource> createResources(@Validated @RequestBody List<Resource> resources){
+        resources = resourceService.saveResources(resources);
+        return new ResponseEntity(resources, HttpStatus.OK);
     }
 
     /**

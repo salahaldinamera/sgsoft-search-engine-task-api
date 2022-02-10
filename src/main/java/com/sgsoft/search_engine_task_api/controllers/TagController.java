@@ -34,6 +34,17 @@ public class TagController {
     }
 
     /**
+     * Create tags operation API endpoint
+     * @param tags List of tags to be added
+     * @return Tags ResponceEntity with HttpStatus code (HttpStatus.OK)
+     */
+    @PostMapping("/create/multi")
+    public ResponseEntity<Tag> createTags(@Validated @RequestBody List<Tag> tags){
+        tags = tagService.saveTags(tags);
+        return new ResponseEntity(tags, HttpStatus.OK);
+    }
+
+    /**
      * Get all tags operation API endpoint
      * @return All tags
      */

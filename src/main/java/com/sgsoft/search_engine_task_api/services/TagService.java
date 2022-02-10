@@ -1,9 +1,7 @@
 package com.sgsoft.search_engine_task_api.services;
 
-import com.sgsoft.search_engine_task_api.exceptions.ResourceNotFoundException;
 import com.sgsoft.search_engine_task_api.exceptions.TagNotFoundException;
 import com.sgsoft.search_engine_task_api.models.Tag;
-import com.sgsoft.search_engine_task_api.repositories.TagRepository;
 import com.sgsoft.search_engine_task_api.repositories.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +25,22 @@ public class TagService {
         }
         return tagRepository.save(tag);
     }
+
+    /**
+     * Save tags service
+     * @param tags The tags to be saved
+     * @return
+     */
+    public List<Tag> saveTags(List<Tag> tags){
+        if (tags == null) throw new IllegalArgumentException("Invalid tags entered.");
+        for (int i = 0;i<tags.size();i++){
+            if(tags.get(i) ==  null)  throw new IllegalArgumentException("One of the tags is invalid.");
+            Tag tag = tagRepository.save(tags.get(i));
+            tags.set(i,tag);
+        }
+        return tags;
+    }
+
 
     /**
      * Get all tags service
