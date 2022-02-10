@@ -1,5 +1,6 @@
 package com.sgsoft.search_engine_task_api.services;
 
+import com.sgsoft.search_engine_task_api.exceptions.ResourceNotFoundException;
 import com.sgsoft.search_engine_task_api.models.Resource;
 import com.sgsoft.search_engine_task_api.repositories.ResourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,8 @@ public class ResourceService {
      * @returnm Returns the resource
      */
     public Resource getResource(Integer id){
-        return resourceRepository.getById(id);
+        if(resourceRepository.findById(id).isEmpty()) throw new ResourceNotFoundException("Resource id " + id + " Not Found");
+        return resourceRepository.findById(id).get();
     }
 
     /**
@@ -47,15 +49,16 @@ public class ResourceService {
      * @param id The id of the resource to be updated
      * @param newResource The new data of the resource
      */
-    public void updateResource(Integer id, Resource newResource){
+    public Resource updateResource(Integer id, Resource newResource){
         Optional<Resource> resourceOptional = Optional.ofNullable(resourceRepository.findById(id).map(resource -> {
             resource.setId(id);
-            resource.setTitle(newResource.getTitle());
-            resource.setLink(newResource.getLink());
-            resource.setType(newResource.getType());
-            resource.setTags(newResource.getTags());
+            if(newResource.getTitle()!=null) resource.setTitle(newResource.getTitle());
+            if(newResource.getLink()!=null) resource.setLink(newResource.getLink());
+            if(newResource.getType()!=null) resource.setType(newResource.getType());
+            if(newResource.getTags()!=null) resource.setTags(newResource.getTags());
             return resource;
         }).orElseGet(() -> {return null;}));
+        return resourceRepository.save(resourceOptional.get());
     }
 
     /**
@@ -63,6 +66,7 @@ public class ResourceService {
      * @param id The resource id to be deleted
      */
     public boolean deleteResource(Integer id){
+        if(resourceRepository.findById(id).isEmpty()) throw new ResourceNotFoundException("Resource id " + id + " Not Found");
         resourceRepository.deleteById(id);
         return true;
     }

@@ -1,5 +1,7 @@
 package com.sgsoft.search_engine_task_api.services;
 
+import com.sgsoft.search_engine_task_api.exceptions.ResourceNotFoundException;
+import com.sgsoft.search_engine_task_api.exceptions.TagNotFoundException;
 import com.sgsoft.search_engine_task_api.models.Tag;
 import com.sgsoft.search_engine_task_api.repositories.TagRepository;
 import com.sgsoft.search_engine_task_api.repositories.TagRepository;
@@ -40,7 +42,8 @@ public class TagService {
      * @returnm Returns the tag
      */
     public Tag getTag(Integer id){
-        return tagRepository.getById(id);
+        if(tagRepository.findById(id).isEmpty()) throw new TagNotFoundException("Tag id " + id + " Not Found");
+        return tagRepository.findById(id).get();
     }
 
     /**
@@ -51,8 +54,7 @@ public class TagService {
     public void updateTag(Integer id, Tag newTag){
         Optional<Tag> tagOptional = Optional.ofNullable(tagRepository.findById(id).map(tag -> {
             tag.setId(id);
-            tag.setKeyword(newTag.getKeyword());
-            tag.setResources(newTag.getResources());
+            if(newTag.getKeyword()!=null) tag.setKeyword(newTag.getKeyword());
             return tag;
         }).orElseGet(() -> {return null;}));
     }
@@ -62,6 +64,7 @@ public class TagService {
      * @param id The tag id to be deleted
      */
     public boolean deleteTag(Integer id){
+        if(tagRepository.findById(id).isEmpty()) throw new TagNotFoundException("Tag id " + id + " Not Found");
         tagRepository.deleteById(id);
         return true;
     }

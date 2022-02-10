@@ -52,7 +52,7 @@ class TagServiceTest {
     void updateTag() {
         Tag tag = new Tag();
         tag.setId(1);
-        tag.setKeyword("Test Keword");
+        tag.setKeyword("Test Keyword");
 
         Tag newTag = new Tag();
         tag.setKeyword("New Test Keyword");

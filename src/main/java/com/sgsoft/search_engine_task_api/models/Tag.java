@@ -14,9 +14,6 @@ public class Tag {
 
     private String keyword;
 
-    @ManyToMany
-    private List<Resource> resources;
-
     public int getId() {
         return id;
     }
@@ -33,14 +30,6 @@ public class Tag {
         this.keyword = keyword;
     }
 
-    public List<Resource> getResources() {
-        return resources;
-    }
-
-    public void setResources(List<Resource> resources) {
-        this.resources = resources;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -49,15 +38,13 @@ public class Tag {
         Tag tag = (Tag) o;
 
         if (id != tag.id) return false;
-        if (keyword != null ? !keyword.equals(tag.keyword) : tag.keyword != null) return false;
-        return resources != null ? resources.equals(tag.resources) : tag.resources == null;
+        return keyword != null ? keyword.equals(tag.keyword) : tag.keyword == null;
     }
 
     @Override
     public int hashCode() {
         int result = id;
         result = 31 * result + (keyword != null ? keyword.hashCode() : 0);
-        result = 31 * result + (resources != null ? resources.hashCode() : 0);
         return result;
     }
 }

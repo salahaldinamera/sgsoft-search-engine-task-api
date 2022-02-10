@@ -62,8 +62,8 @@ public class ResourceController {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Resource> updateResource(@PathVariable int id, @Validated @RequestBody Resource newResource){
-        resourceService.updateResource(id,newResource);
-        return new ResponseEntity(newResource, HttpStatus.OK);
+        Resource updatedResource = resourceService.updateResource(id,newResource);
+        return new ResponseEntity(updatedResource, HttpStatus.OK);
     }
 
     /**
