@@ -29,7 +29,7 @@ public class TagController {
      */
     @PostMapping("/create")
     public ResponseEntity<Tag> createTag(@Validated @RequestBody Tag tag){
-        tagService.saveTag(tag);
+        tag = tagService.saveTag(tag);
         return new ResponseEntity(tag, HttpStatus.OK);
     }
 

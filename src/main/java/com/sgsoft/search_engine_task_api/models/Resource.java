@@ -3,6 +3,7 @@ package com.sgsoft.search_engine_task_api.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,6 +19,55 @@ public class Resource {
 
     @ManyToMany
     private List<Tag> tags;
+
+    /**
+     * Default no argument constructor
+     */
+    public Resource() {
+    }
+
+    /**
+     * Resource constructor without tags
+     * @param title The title of the resource
+     * @param type The type of the resource
+     * @param link The link of the resource
+     */
+    public Resource(String title, String type, String link) {
+        this.title = title;
+        this.type = type;
+        this.link = link;
+    }
+
+    /**
+     * Resource constructor which convert strings to tags if entered a string and pass the tags if entered as tag object
+     * @param title The title of the resource
+     * @param type The type of the resource
+     * @param link The link of the resource
+     * @param tags The tags of the resource
+     */
+    public Resource(String title, String type, String link, List<Object> tags) {
+        this.id = id;
+        this.title = title;
+        this.type = type;
+        this.link = link;
+
+        this.tags = new ArrayList<>();
+
+        if(!tags.isEmpty()){
+            if(tags.get(0) instanceof Tag){
+                for(int i=0;i<tags.size();i++){
+                    this.tags.add((Tag) tags.get(i));
+                    System.out.println("Tags tag " + tags.toString());
+                }
+            }
+            if (tags.get(0) instanceof String) {
+                for(int i=0;i<tags.size();i++){
+                    this.tags.add(new Tag((String) tags.get(i)));
+                    System.out.println("Tags string " + tags.toString());
+                }
+            }
+        }
+    }
 
     public int getId() {
         return id;
@@ -59,6 +109,11 @@ public class Resource {
         this.tags = tags;
     }
 
+    /**
+     * Override equals method used in comparing tags
+     * @param o The object to compare to
+     * @return True if equals or False if not
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -73,6 +128,10 @@ public class Resource {
         return tags != null ? tags.equals(resource.tags) : resource.tags == null;
     }
 
+    /**
+     * Basic auto generated hash code
+     * @return hashcode
+     */
     @Override
     public int hashCode() {
         int result = id;
@@ -81,5 +140,20 @@ public class Resource {
         result = 31 * result + (link != null ? link.hashCode() : 0);
         result = 31 * result + (tags != null ? tags.hashCode() : 0);
         return result;
+    }
+
+    /**
+     * Override to string
+     * @return String representing the resource object
+     */
+    @Override
+    public String toString() {
+        return "Resource{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", type='" + type + '\'' +
+                ", link='" + link + '\'' +
+                ", tags=" + tags +
+                '}';
     }
 }

@@ -2,10 +2,13 @@ package com.sgsoft.search_engine_task_api.services;
 
 import com.sgsoft.search_engine_task_api.exceptions.ResourceNotFoundException;
 import com.sgsoft.search_engine_task_api.models.Resource;
+import com.sgsoft.search_engine_task_api.models.Tag;
 import com.sgsoft.search_engine_task_api.repositories.ResourceRepository;
+import com.sgsoft.search_engine_task_api.repositories.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,14 +18,42 @@ public class ResourceService {
     @Autowired
     private ResourceRepository resourceRepository;
 
+    @Autowired
+    private TagRepository tagRepository;
+
     /**
      * Save resource service
      * @param resource The resource to be saved
      */
     public Resource saveResource(Resource resource){
+
         if(resource == null){
             throw new IllegalArgumentException("Invalid resource details passed.");
         }
+
+        List<Tag> tagList = resource.getTags();
+        resource.setTags(new ArrayList<>());
+
+        /*
+        * Check if there is tags for the resource if so
+        * loop throw the tags and check if its stored in the database
+        * if its stored in the database then link the resource to it
+        * if its not stored in the database then create one and link the resource to it
+        * */
+        if(tagList !=null && !tagList.isEmpty()){
+            for(int i = 0;i<tagList.size();i++){
+                Optional<Tag> tagOptional = tagRepository.findTagByKeyword(tagList.get(i).getKeyword());
+                if(tagOptional.isEmpty()){
+                    Tag tag = new Tag();
+                    tag.setKeyword(tagList.get(i).getKeyword());
+                    Tag storedTag = tagRepository.save(tag);
+                    resource.getTags().add(storedTag);
+                }else {
+                    resource.getTags().add(tagOptional.get());
+                }
+            }
+        }
+
         return resourceRepository.save(resource);
     }
 
@@ -34,8 +65,7 @@ public class ResourceService {
     public List<Resource> saveResources(List<Resource> resources){
         if (resources == null) throw new IllegalArgumentException("Invalid resources entered.");
         for (int i = 0;i<resources.size();i++){
-            if(resources.get(i) ==  null)  throw new IllegalArgumentException("One of the resources is invalid.");
-            Resource resource = resourceRepository.save(resources.get(i));
+            Resource resource = saveResource(resources.get(i));
             resources.set(i,resource);
         }
         return resources;
