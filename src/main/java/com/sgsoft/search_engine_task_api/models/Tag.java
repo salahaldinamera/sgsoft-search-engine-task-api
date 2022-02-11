@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Locale;
 
 @Entity
 public class Tag {
@@ -51,6 +52,7 @@ public class Tag {
     }
 
     public void setKeyword(String keyword) {
+        keyword = keyword.toLowerCase();
         this.keyword = keyword;
     }
 
