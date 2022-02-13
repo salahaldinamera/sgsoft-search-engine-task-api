@@ -1,6 +1,4 @@
 # SGSOFT Search Engine Task API
-<<<<<<< HEAD
-=======
 
 
 
@@ -30,9 +28,14 @@ This project was created as a demo task for sgsoft
 
 
 
-## Project Heroku Deployed Version
+## Heroku Deployed Project API Version
 
-> [sgsoft-search-engine-task-api.herokuapp.com](sgsoft-search-engine-task-api.herokuapp.com)
+> [sgsoft-search-engine-task-api.herokuapp.com](https://sgsoft-search-engine-task-api.herokuapp.com/)
 
 
->>>>>>> 890f33b158d64e23a90d40d9a887a996c278f6f4
+
+## Heroku Deployed Project APP Version
+
+> [sgsoft-search-engine-task-app.herokuapp.com](https://sgsoft-search-engine-task-app.herokuapp.com/)
+
+
