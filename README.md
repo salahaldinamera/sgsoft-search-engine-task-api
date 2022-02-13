@@ -26,7 +26,7 @@ This project was created as a demo task for sgsoft
 
 6. Run the project.
 
-t
+
 
 ## Heroku Deployed Project API Version
 
