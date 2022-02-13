@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/resource")
+@CrossOrigin(origins = "*")
 public class ResourceController {
 
     @Autowired
