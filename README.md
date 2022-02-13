@@ -30,6 +30,6 @@ This project was created as a demo task for sgsoft
 
 ## Project Heroku Deployed Version
 
-> [sgsoft-search-engine-task-api.herokuapp.com](sgsoft-search-engine-task-api.herokuapp.com)
+> [sgsoft-search-engine-task-api.herokuapp.com](https://sgsoft-search-engine-task-app.herokuapp.com/)
 
 
