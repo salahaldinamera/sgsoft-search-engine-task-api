@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 * */
 
 @SpringBootApplication
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class SearchEngineTaskApiApplication {
 
 	public static void main(String[] args) {
