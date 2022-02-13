@@ -26,13 +26,13 @@ This project was created as a demo task for sgsoft
 
 6. Run the project.
 
-
+t
 
 ## Heroku Deployed Project API Version
 
 > [sgsoft-search-engine-task-api.herokuapp.com](https://sgsoft-search-engine-task-api.herokuapp.com/)
 
-
+> [sgsoft-search-engine-task-api.herokuapp.com/swagger-ui](https://sgsoft-search-engine-task-api.herokuapp.com/swagger-ui/index.html)
 
 ## Heroku Deployed Project APP Version
 
